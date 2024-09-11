@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package token;
+
+option go_package = "github.com/tumbleweedd/auth_service_proto/proto/token";
+
+service TokenService {
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Logout(LogoutRequest) returns (LogoutResponse) {}
+  rpc Refresh(RefreshRequest) returns (RefreshResponse) {}
+  rpc Validate(ValidateRequest) returns (ValidateResponse) {}
+}
+
+message TokenInfo {
+  string token = 1;
+  google.protobuf.Timestamp issuedAt = 2;
+  google.protobuf.Timestamp expiresAt = 3;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  TokenInfo accessToken = 1;
+  TokenInfo refreshToken = 2;
+}
+
+message LogoutRequest {
+  string token = 1;
+}
+
+message LogoutResponse {
+  bool success = 1;
+}
+
+message RefreshRequest {
+  TokenInfo refreshToken = 1;
+}
+
+message RefreshResponse {
+  string token = 1;
+  google.protobuf.Timestamp issuedAt = 2;
+  google.protobuf.Timestamp expiresAt = 3;
+}
+
+message ValidateRequest {
+  string token = 1;
+}
+
+message ValidateResponse {
+  bool valid = 1;
+}

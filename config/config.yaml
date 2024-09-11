@@ -1,0 +1,28 @@
+# config/config.yaml
+
+env: "local"
+grpc:
+  port: 5001
+  timeout: "5s"
+postgres:
+  port: 5432
+  host: "postgres-auth-service"
+  db_name: "auth_service"
+  user: "postgres"
+  password: "postgres"
+  sslmode: "disable"
+jwt_manager:
+  secret_key: "qewf1231212rU^%$582u3o12uejo2198u$@!@#"
+  access_token_ttl: "12h"
+  refresh_token_ttl: "720h"
+cache:
+  default_ttl: "10m"
+event_sender:
+  handle_period_min: "1m"
+kafka:
+  user_event_topic: "user_topic"
+  broker_list:
+    - "localhost:9092"
+  port: "9092"
+http:
+  port: 8080

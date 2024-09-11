@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package user;
+
+option go_package = "github.com/tumbleweedd/auth_service_proto/proto/user";
+
+service UserService {
+  rpc Create(CreateUserRequest) returns (CreateUserResponse) {}
+  rpc Update(UpdateUserRequest) returns (UpdateUserResponse) {}
+  rpc Delete(DeleteUserRequest) returns (google.protobuf.Empty) {}
+  rpc Get(GetUserRequest) returns (GetUserResponse) {}
+  rpc List(ListUsersRequest) returns (ListUsersResponse) {}
+}
+
+// User creation
+message CreateUserRequest {
+  string firstName = 1;
+  string lastName = 2;
+  string email = 3;
+  string login = 4;
+  string password = 5;
+  string phone = 6;
+}
+
+message CreateUserResponse {
+  string uuid = 1;
+}
+
+// User info
+message UserInfo {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string login = 5;
+  string phone = 6;
+}
+
+// User update
+message UpdateUserRequest {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string login = 5;
+  string phone = 6;
+}
+
+message UpdateUserResponse {
+  string id = 1;
+}
+
+// User deletion
+message DeleteUserRequest {
+  string id = 1;
+}
+
+// DeleteUserResponse is an empty message
+
+// User retrieval
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  UserInfo user = 1;
+}
+
+// User listing
+message ListUsersRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListUsersResponse {
+  repeated UserInfo users = 1;
+}
+
+
